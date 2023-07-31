@@ -24,3 +24,14 @@ models:
     +materialized: view
     +grants:
       select: ['transformer', 'reporter']
+
+seeds:
+  dbt_project_evaluator:
+    dbt_project_evaluator_exceptions:
+      +enabled: false
+
+vars:
+  
+  staging_prefixes: ['stg_']
+  marts_prefixes: ['fct_', 'dim_']
+  other_prefixes: ['rpt_']

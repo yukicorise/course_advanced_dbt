@@ -1,0 +1,9 @@
+models:
+  - name: fct_events
+    description: Placeholder fct_events yml file
+    columns:
+      - name: event_id
+        description: '{{ doc("bingeflix_event_id") }}'
+        tests:
+          - not_null
+          - unique
