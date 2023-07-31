@@ -1,0 +1,45 @@
+models:
+  - name: rpt_mrr
+    description: This model contains calculations for the monthly recurring revenue generated per user and subscription for each month.
+    columns:
+      - name: surrogate_key
+        description: '{{ doc("bingeflix_surrogate_key") }}'
+        tests:
+          - not_null
+          - unique
+
+      - name: date_month
+        description: '{{ doc("bingeflix_date_month") }}'
+
+      - name: user_id
+        description: '{{ doc("bingeflix_user_id") }}'
+
+      - name: subscription_id
+        description: '{{ doc("bingeflix_subscription_id") }}'
+
+      - name: starts_at
+        description: '{{ doc("bingeflix_subscription_starts_at") }}'
+
+      - name: ends_at
+        description: '{{ doc("bingeflix_subscription_ends_at") }}'
+
+      - name: plan_name
+        description: '{{ doc("bingeflix_plan_name") }}'
+
+      - name: mrr_amount
+        description: '{{ doc("bingeflix_mrr_amount") }}'
+
+      - name: mrr_change
+        description: '{{ doc("bingeflix_mrr_change") }}'
+
+      - name: retained_mrr_amount
+        description: '{{ doc("bingeflix_retained_mrr_amount") }}'
+
+      - name: previous_month_mrr_amount
+        description: '{{ doc("bingeflix_previous_month_mrr_amount") }}'
+
+      - name: change_category
+        description: '{{ doc("bingeflix_change_category") }}'
+
+      - name: month_retained_number
+        description: '{{ doc("bingeflix_month_retained_number") }}'
