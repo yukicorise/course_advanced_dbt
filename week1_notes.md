@@ -1,5 +1,5 @@
 ## Task 2
-I've added docs blocks for source and core models. In future work, we could make this more comprehensive by adding model descriptions in addition to field descriptions, and adding docs blocks for intermediate models as well. 
+I've added docs blocks for source and core models. In future work, we could make this more comprehensive by adding model descriptions in addition to field descriptions, and adding docs blocks for intermediate models as well.
 
 Please note: when I added new documentation yml files as a part of Task 3, I did not create comprehensive docs here (which I would do with more time!)
 

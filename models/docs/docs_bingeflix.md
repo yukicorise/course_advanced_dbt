@@ -1,5 +1,5 @@
 # Bingeflix Docs
-This file contains docs blocks for Bingeflix sources. Note - in future work, we could make this more comprehensive by adding model descriptions in addition to field descriptions, and adding docs blocks to the intermediate models as well. 
+This file contains docs blocks for Bingeflix sources. Note - in future work, we could make this more comprehensive by adding model descriptions in addition to field descriptions, and adding docs blocks to the intermediate models as well.
 
 ## Events
 This section contains documentation for the Bingeflix Events table.
