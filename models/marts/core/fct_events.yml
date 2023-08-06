@@ -7,3 +7,11 @@ models:
         tests:
           - not_null
           - unique
+      - name: session_id
+        description: '{{ doc("bingeflix_session_id") }}'
+      - name: event_name
+        description: '{{ doc("bingeflix_event_name") }}'
+      - name: user_id
+        description: '{{ doc("bingeflix_user_id") }}'
+      - name: created_at
+        description: '{{ doc("bingeflix_event_created_at") }}'
