@@ -1,5 +1,5 @@
 # Bingeflix Docs
-This file contains docs blocks for Bingeflix sources. Note - in future work, we could make this more comprehensive by adding model descriptions in addition to field descriptions, and adding docs blocks to the intermediate models as well. 
+This file contains docs blocks for Bingeflix sources. Note - in future work, we could make this more comprehensive by adding model descriptions in addition to field descriptions, and adding docs blocks to the intermediate models as well.
 
 ## Events
 This section contains documentation for the Bingeflix Events table.
@@ -142,4 +142,12 @@ Where the user resides (i.e. the state or province).
 
 {% docs bingeflix_user_country %}
 The country where the user resides.
+{% enddocs %}
+
+{% docs bingeflix_user_first_subscription_starts_at %}
+The date the user's first subscription starts at.
+{% enddocs %}
+
+{% docs bingeflix_user_count_of_subscriptions %}
+The historical count of subscriptions that the user has had.
 {% enddocs %}
