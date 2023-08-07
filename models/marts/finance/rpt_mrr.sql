@@ -12,8 +12,8 @@ monthly_subscriptions AS (
         ends_at,
         plan_name,
         pricing,
-        DATE(DATE_TRUNC('month', starts_at)) AS start_month,
-        DATE(DATE_TRUNC('month', ends_at)) AS end_month
+        {{ timestamp_to_date_month('starts_at') }},
+        {{ timestamp_to_date_month('ends_at') }}
     FROM
         {{ ref('dim_subscriptions') }}
     WHERE
@@ -31,7 +31,7 @@ months AS (
 ),
 
 -- Logic CTEs
--- Create subscription period start_month and end_month ranges
+-- Create subscription period starts_at_month and ends_at_month ranges
 subscription_periods AS (
     SELECT
         subscription_id,
@@ -40,15 +40,15 @@ subscription_periods AS (
         pricing AS monthly_amount,
         starts_at,
         ends_at,
-        start_month,
+        starts_at_month,
 
-        -- For users that cancel in the first month, set their end_month to next month because the subscription remains active until the end of the first month
-        -- For users who haven't ended their subscription yet (end_month is NULL) set the end_month to one month from the current date (these rows will be removed from the final CTE)
+        -- For users that cancel in the first month, set their ends_at_month to next month because the subscription remains active until the end of the first month
+        -- For users who haven't ended their subscription yet (ends_at_month is NULL) set the ends_at_month to one month from the current date (these rows will be removed from the final CTE)
         CASE
-            WHEN start_month = end_month THEN DATEADD('month', 1, end_month)
-            WHEN end_month IS NULL THEN DATE(DATEADD('month', 1, DATE_TRUNC('month', CURRENT_DATE)))
-            ELSE end_month
-        END AS end_month
+            WHEN starts_at_month = ends_at_month THEN DATEADD('month', 1, ends_at_month)
+            WHEN ends_at_month IS NULL THEN DATE(DATEADD('month', 1, DATE_TRUNC('month', CURRENT_DATE)))
+            ELSE ends_at_month
+        END AS ends_at_month
     FROM
         monthly_subscriptions
 ),
@@ -58,8 +58,8 @@ subscribers AS (
     SELECT
         user_id,
         subscription_id,
-        MIN(start_month) AS first_start_month,
-        MAX(end_month) AS last_end_month
+        MIN(starts_at_month) AS first_starts_at_month,
+        MAX(ends_at_month) AS last_ends_at_month
     FROM
         subscription_periods
     GROUP BY
@@ -76,9 +76,9 @@ subscriber_months AS (
         subscribers
         INNER JOIN months
             -- All months after start date
-            ON months.date_month >= subscribers.first_start_month
+            ON months.date_month >= subscribers.first_starts_at_month
                 -- and before end date
-                AND months.date_month < subscribers.last_end_month
+                AND months.date_month < subscribers.last_ends_at_month
 ),
 
 -- Join together to create base CTE for MRR calculations
@@ -94,10 +94,10 @@ mrr_base AS (
             ON subscriber_months.user_id = subscription_periods.user_id
                 AND subscriber_months.subscription_id = subscription_periods.subscription_id
                 -- The month is on or after the subscription start date...
-                AND subscriber_months.date_month >= subscription_periods.start_month
+                AND subscriber_months.date_month >= subscription_periods.starts_at_month
                 -- and the month is before the subscription end date (and handle NULL case)
-                AND (subscriber_months.date_month < subscription_periods.end_month
-                    OR subscription_periods.end_month IS NULL)
+                AND (subscriber_months.date_month < subscription_periods.ends_at_month
+                    OR subscription_periods.ends_at_month IS NULL)
 ),
 
 -- Calculate subscriber level MRR (monthly recurring revenue)

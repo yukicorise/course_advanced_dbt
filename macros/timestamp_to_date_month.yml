@@ -1,0 +1,7 @@
+macros:
+  - name: timestamp_to_date_month
+    description: A macro for pulling out the month from a timestamp, as a date
+    arguments:
+      - name: timestamp_field
+        type: timestamp
+        description: The name of the timestamp column you want to convert
