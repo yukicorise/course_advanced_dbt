@@ -29,6 +29,40 @@ seeds:
   dbt_project_evaluator:
     dbt_project_evaluator_exceptions:
       +enabled: false
+  course_advanced_dbt:
+    unit_testing:
+      +schema: unit_testing
+      +tags: unit_testing
+      unit_test_expected_output_rpt_mrr:
+        +column_types:
+          surrogate_key: STRING
+          date_month: DATE
+          user_id: INT
+          subscription_id: INT
+          starts_at: TIMESTAMP
+          ends_at: TIMESTAMP
+          plan_name: STRING
+          mrr_amount: FLOAT
+          mrr_change: FLOAT
+          retained_mrr_amount: FLOAT
+          previous_month_mrr_amount: FLOAT
+          change_category: STRING
+          month_retained_number: INT
+      unit_test_input_dim_dates:
+        +column_types:
+          calendar_date: DATE
+          day_of_month: INT
+      unit_test_input_dim_subscriptions:
+        +column_types:
+          subscription_id: INT
+          user_id: INT
+          starts_at: TIMESTAMP
+          ends_at: TIMESTAMP
+          plan_name: STRING
+          pricing: INT
+          billing_period: STRING
+          start_month: DATE
+          end_month: DATE
 
 vars:
 

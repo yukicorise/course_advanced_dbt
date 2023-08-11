@@ -6,3 +6,9 @@ For example, `stg_bingeflix_subscription_plans` and `bingeflix.subscription_plan
 I was able to spot these redundant tests by observing the lineage graph and checking the tests in the documentation.
 
 ## Task 2
+Added a custom generic test to replace a redundant singular test.
+
+## Task 3
+I ended up creating a unit test for rpt_mrr by creating input and output csvs filtered for one real user (user_id = 71548).
+I'd be curious to hear how others filtered down their input/output csvs. How much data is typical to include? Should it aim to cover several edge cases?
+Confirming that all tests pass when I run `dbt build --select rpt_mrr --vars 'unit_testing: true'`
