@@ -13,6 +13,8 @@ models:
 
       - name: pricing
         description: '{{ doc("bingeflix_pricing") }}'
+        tests:
+          - column_is_positive
 
       - name: payment_period
         description: '{{ doc("bingeflix_payment_period") }}'
