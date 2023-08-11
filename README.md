@@ -119,3 +119,4 @@ Awesome! You are now ready to start the course! 🚀🚀🚀
 - Columns that should never be null must have a not_null schema test.
 - Columns that should be unique must have a unique schema test.
 - Where possible, use schema tests from the dbt_utils or dbt_expectations packages to perform extra verification.
+- Note: For all of the above testing conventions, we should make a best effort to avoid redundant tests that lead to "test bloat". For example, a test in a staging model can be redundant if the same test is conducted in the source model and no additional joins/transformations happen in the staging model. In this case, default to leaving the tests in the source model and do not add them to the staging model.
