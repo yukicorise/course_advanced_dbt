@@ -69,3 +69,10 @@ vars:
   staging_prefixes: ['stg_']
   marts_prefixes: ['fct_', 'dim_']
   other_prefixes: ['rpt_']
+
+dispatch:
+  - macro_namespace: dbt
+    search_order:
+      - course_advanced_dbt
+      - dbt_snowflake_monitoring
+      - dbt
